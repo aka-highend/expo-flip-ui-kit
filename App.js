@@ -1,43 +1,74 @@
-import * as React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-// import { Text } from '@flip.id/ui-kit';
-import { FlipUiProvider } from '@flip.id/ui-kit';
-import Constants from 'expo-constants';
+import React, {useState} from 'react';
+import {View, StyleSheet, Text, ScrollView} from 'react-native';
 
-export default function App() {
+import {DefaultCheckbox, RadioButton} from 'kit-ui-flip-v2-demo';
+
+const dataActive = [
+  {
+    key: 'opt1',
+    text: 'Option 1',
+  },
+  {
+    key: 'opt2',
+    text: 'Option 2',
+  },
+];
+
+const dataDisabled = [
+  {
+    key: 'opt3',
+    text: 'Option 3',
+  },
+  {
+    key: 'opt4',
+    text: 'Option 4',
+  },
+];
+
+const App = () => {
+  const [isActive, setIsActive] = useState(false);
+  const [opt1, setOpt1] = useState(false);
+
   return (
-    <FlipUiProvider>
+    <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.paragraph}>
-          @FLIP/UI-KIT SNACK-EXPO RFACHRUR CEK
-        </Text>
+        <Text style={styles.textTitle}>Checkbox noob</Text>
+        <DefaultCheckbox
+          isActive={isActive}
+          setIsActive={setIsActive}
+          title="Checkbox 1"
+          disabled={false}
+        />
+        <DefaultCheckbox
+          isActive={opt1}
+          setIsActive={setOpt1}
+          title="Checkbox 2"
+          disabled={false}
+        />
+        <DefaultCheckbox title="Checkbox 3" disabled={true} />
       </View>
-    </FlipUiProvider>
+      <View style={styles.container}>
+        <Text style={styles.textTitle}>Radio Button noob</Text>
+        <RadioButton data={dataActive} disabled={false} />
+        <RadioButton data={dataDisabled} disabled={true} />
+      </View>
+    </ScrollView>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
+    alignContent: 'center',
+    display: 'flex',
+    padding: 25,
+    marginTop: 20,
   },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
+  textTitle: {
+    marginBottom: 15,
+    fontSize: 20,
     textAlign: 'center',
   },
 });
-
-// import { registerRootComponent } from 'expo';
-
-// import FlipUIKitApp from './src/index';
-
-
-// registerRootComponent(FlipUIKitApp);
-
-// export default App;
-
